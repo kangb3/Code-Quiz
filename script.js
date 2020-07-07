@@ -10,3 +10,30 @@ var questions = [
       answer: 'parentheses'
     }
   ];
+
+
+  function startQuiz(){
+    var message = document.getElementById("message");
+
+    message.style.display = "block";
+
+    if (message.style.display === "block"){
+      message.style.display = "none";
+    }
+    else{
+        message.style.display = "block";
+
+    }
+}
+
+// function quizQuestions() {
+//   var questionRow = document.getElementById("questionRow");
+
+//   if (questionRow.style.display === "block"){
+//     questionRow.style.display = "none";
+//   }
+//   else{
+//       message.style.display = "block";
+
+//   }
+}
