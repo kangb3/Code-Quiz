@@ -9,38 +9,81 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
       
-
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"crossorigin="anonymous"></script>
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="./style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"crossorigin="anonymous"></script>
+    <script src="script.js"></script>
     <title>Coding Quiz</title>
   </head>
   <body>
     <main class="container">
 
+      <main class="container">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <div class="btn btn-link" id="scoreBoard">Scoreboard</div>
-                  <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <div id="time"></div>
-                    </li>
-                  </ul>
-          </div>
+            <div class="btn btn-link" id="scoreBoard" data-toggle="modal" data-target="#scoreCenter">Scores</div>
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <div id="timer"></div>
+                </li>
+              </ul>
         </nav>
-      </section> 
-      
-      <h2>Coding Quiz</h2>
-      <section class = "jumbotron">
-        
-        <p>Press Start Quiz to take the Quiz</p>
-        <p>This quiz has code related questions. This is a timed quiz.</p>
-        <p>Note: Each incorrect answer will subtract five seconds from your quiz time. Good luck!</p>
-        <button type="button" class="btn btn-primary">Start Quiz</button>
 
-      </section>
+        <h1>Coding Quiz</h1>
+        
+
+        <div id="message">
+            <section class="jumbotron">
+                <p>Press Start Quiz to take the Quiz</p>
+                <p>This quiz has code related questions. This is a timed quiz.</p>
+                <p>Note: Each incorrect answer will subtract five seconds from your quiz time. Good luck!</p>
+            </section>
+            <button type="button" onclick="startQuiz()" class="btn btn-primary">Start Quiz</button>
+        </div>  
+        
+        <div id = "quizSelection" class = "hide">
+            <section class="jumbotron">
+                <p>Please select Basic Questions button to start the quiz.</p>
+            </section>
+            
+            <button type="button" id="comQuest" onclick="quizQuestions()" class="btn btn-primary">Basic Questions</button>
+
+        </div>
+
+        
+        <div class="container" id="questions">
+            <div class="row" id="questionRow">
+                <div id="title"></div>
+            </div>
+            <div class="row" id="choiceRow">
+                <div id="choices"></div>
+            </div>
+            <div class="row" id="signRow">
+                <div id="sign"></div>
+            </div>
+            <div class="row" id="answerRow">
+                <div id="answer"></div>
+            </div>
+            
+            <div class="row" id="allDoneRow">
+                <div id="completeMessage"></div>
+            </div>
+            <div class="row" id="finalScoreRow">
+                <div id="finalScore"></div>
+            </div>
+            <div class="row" id="initialsRow">
+                <div id="initials"></div>
+            </div>
+            <div class="row" id="submitRow">
+                <div id="submitButton"></div>
+            </div>
+            
+        </div>
 
     </main>
 
-    <script src="./script.js"></script>
+    
   </body>
 </html>
