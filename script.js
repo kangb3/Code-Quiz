@@ -6,8 +6,29 @@ var questions = [
   },
   {
     title: 'The condition in an if / else statement is enclosed within ____.',
-    choices: ['quotes', 'curly brackets', 'parentheses', 'square brackets'],
+    choices: ['quotes', 'curly brackets', 'parenthesis', 'square brackets'],
     answer: 'parentheses'
+    
+  },
+
+  {
+    title: 'Which built-in method combines the text of two strings and returns a new string?',
+    choices: ['append()', 'concat()', 'parenthesis', 'attach()'],
+    answer: 'concat()'
+    
+  },
+
+  {
+    title: 'Which built-in method returns the string representation of the number\'s value?',
+    choices: ['toValue()', 'toNumber()', 'toString()', 'attach()'],
+    answer: 'toString()'
+    
+  },
+
+  {
+    title: 'Which of the following function of String object returns the characters in a string between two indexes into the string?',
+    choices: ['slice()', 'split()', 'substr()', 'substring()'],
+    answer: 'substring()'
     
   }
 ];
