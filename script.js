@@ -1,110 +1,264 @@
 var questions = [
-    {
-      title: 'Commonly used data types DO NOT include:',
-      choices: ['strings', 'booleans', 'alerts', 'numbers'],
-      answer: 'alerts'
-    },
-    {
-      title: 'The condition in an if / else statement is enclosed within ____.',
-      choices: ['quotes', 'curly brackets', 'parentheses', 'square brackets'],
-      answer: 'parentheses'
+  {
+    title: 'Commonly used data types DO NOT include:',
+    choices: ['strings', 'booleans', 'alerts', 'numbers'],
+    answer: 'alerts'
+  },
+  {
+    title: 'The condition in an if / else statement is enclosed within ____.',
+    choices: ['quotes', 'curly brackets', 'parentheses', 'square brackets'],
+    answer: 'parentheses'
+    
+  }
+];
+
+
+var score = 0;
+var time;
+var questionNumber = 0;
+var userChoice;
+
+function startQuiz(){
+var message = document.getElementById("message");
+var quizSelection = document.getElementById("quizSelection");
+
+message.style.display = "block";
+quizSelection.style.display = "none";
+if (message.style.display === "block"){
+  message.style.display = "none";
+  quizSelection.style.display = "block";
+}
+else{
+  message.style.display = "block";
+  quizSelection.style.display = "none";
+}
+
+$("#comQuest").on("click", function(){
+countDown();
+});
+
+
+}
+
+var userList = [];
+
+
+
+$(document).ready(function () {   
+init(); 
+function renderPreviousUser(){
+  for (var i = 0; i < userList.length; i++){
+      var oldUser = userList[i];
+      var previousUser = $("<li>");
+
+      previousUser.append(oldUser);
       
-    }
-  ];
+      $("#previousUser").append(previousUser);
+  }
+}
 
-  var score = 0;
-  var time;
-  var questionNumber = 0;
-  var userChoice;
+function init(){
+  
+  
+  var storedUser = JSON.parse(localStorage.getItem("userList"));
 
-  function startQuiz(){
-    var message = document.getElementById("message");
-    var quizSelection = document.getElementById("quizSelection");
+  if (storedUser !== null){
+      userList = storedUser;
+  }
+  renderPreviousUser();
+}
+});
 
-    message.style.display = "block";
-    quizSelection.style.display = "none";
-    if (message.style.display === "block"){
-        message.style.display = "none";
-        quizSelection.style.display = "block";
-    }
-    else{
-        message.style.display = "block";
-        quizSelection.style.display = "none";
+
+function quizQuestions() {
+var questionRow = document.getElementById("questions");
+var quizSelection = document.getElementById("quizSelection");
+
+quizSelection.style.display = "block";
+if (quizSelection.style.display  === "block"){
+  quizSelection.style.display = "none";
+  questionRow.style.display = "block";
+}
+else{
+  quizSelection.style.display= "block";
+  questionRow.style.display = "none";
+}
+
+$("#title").children().hide();
+$("#choices").children().hide();
+$("#answer").children().hide();
+$("#sign").children().hide();
+$("#time").children().hide();
+
+
+
+
+
+var showQuestion = $("<h2>");
+
+showQuestion.append(questions[questionNumber].title);
+$("#title").append(showQuestion);
+
+for (i = 0; i < 4; i++) {
+
+  var choiceOptions = $("<button>");
+  choiceOptions.attr("type", "button");
+  choiceOptions.attr("value", questions[questionNumber].choices[i]);
+  choiceOptions.css("margin-top", "50px");
+  choiceOptions.addClass("btn btn-primary btn-lg btn-block choices");
+  choiceOptions.append(questions[questionNumber].choices[i]);
+  $("#choices").append(choiceOptions);
+}
+
+}
+var displayMessage ={
+correct: "Correct",
+incorrect: "Incorrect",
+answerDisplay: "Correct answer: ",
+quizComplete: "Quiz is complete",
+finalScore: "Final score: ",
+initials: "Enter initials: "
+}
+//main
+$(document).on("click",".choices", function(){
+userChoice = $(this).attr("value");
+$("answer").empty
+
+
+if(userChoice === questions[questionNumber].answer && timer > 0){
+  var result = $("<p>");
+  result.append(displayMessage.correct);
+  $("#answer").append(result)
+
+  score += 2;
+
+  questionNumber ++;
+
+  setTimeout(quizQuestions, 1500);
+
+  
+  if(questionNumber === questions.length){
+      setTimeout(finalPage, 2500);
+      clearInterval(time);
+  }
+}
+else if (userChoice != questions[questionNumber].answer && timer > 0){
+  
+  var result = $("<h5>");
+  result.append(displayMessage.incorrect);
+  $("#sign").append(result);
+
+  var answer = $("<p>");
+  answer.append(displayMessage.answerDisplay,questions[questionNumber].answer);
+  $("#answer").append(answer);
+
+  timer -= 5;
+  score -= 2;
+  questionNumber ++;
+  setTimeout(quizQuestions, 2000);
+
+
+  if(questionNumber === questions.length){
+      setTimeout(finalPage, 2500);
+      clearInterval(time);
+  }
+}
+})
+
+
+function finalPage(){
+      $("#completeMessage").children().show();
+      $("#finalScore").children().show();
+      $("#initials").children().show();
+      
+      var comepleteMessage = $("<h5>");
+      comepleteMessage.append(displayMessage.quizComplete);
+      $("#completeMessage").append(comepleteMessage);
+
+      //final score
+      var finalScoreMsg = $("<p>");
+      finalScoreMsg = displayMessage.finalScore + score;
+      $("#finalScore").append(finalScoreMsg);
+
+      //initials
+      var initialMsg = $("<p>");
+      initialMsg.append(displayMessage.initials);
+      var initialBox = $("<input>");
+      initialBox.attr("type", "text");
+      initialBox.attr("id", "initialBox");
+      $("#initials").append(initialMsg,initialBox);
+
+      //submit button
+      var initialSubmit = $("<button>");
+      initialSubmit.attr("type", "button");
+      initialSubmit.attr("id", "submitButton");
+      initialSubmit.css("margin-top", "50px");
+      initialSubmit.addClass("btn btn-primary btn-lg btn-block");
+      initialSubmit.html("Submit");
+      $("#submitButton").append(initialSubmit);
+
+     
+
+
+
+
+      
+      $("#submitButton").on("click", function(){
+          var initialInput = document.getElementById("initialBox").value;
+          var nameList = $("<p>");
+          nameList.append(initialInput + " score is " + score);
+          $("#nameList").append(nameList);
+
+          $("#submitButton").children().hide();
+          $("#resetButton").children().show();
+          
+          if(initialInput === ""){
+              return;
+          }
+
+          userList.push(initialInput, score);
+          console.log(userList);
+          
+          function storeUser(){
+              localStorage.setItem("userList", JSON.stringify(userList));
+              }
+
+          storeUser();
+          renderPreviousUser();
+          
+      });
 
    
 }
 
-$("#comQuest").on("click", function(){
-  countDown();
-  });
 
-function quizQuestions() {
-  var questionRow = document.getElementById("questionRow");
 
-  quizSelection.style.display = "block"
-  quizOption.style.display = "none";
-  if (quizSelection.style.display === "block"){
-    quizSelection.style.display = "none"
-    questionRow.style.display = "block";
-  }
-  else{
-    quizSelection.display = "block";
-      questionRow.style.display = "none";
+function countDown(){
+$("#timer").empty();
+timer = 75;
+var timeDiv = $("<h6>");
+timeDiv.append("Time remaining: " + timer + "seconds");
+$("#timer").append(timeDiv);
+time = setInterval(clock, 1000);
 
-  }
-  
+}
 
+function clock(){
+$("#timer").empty();
+timer--;
+var timeDiv = $("<h6>");
+timeDiv.append("Time remaining: " + timer + "seconds");
+$("#timer").append(timeDiv);
+
+if(timer < 1){
   $("#title").children().hide();
   $("#choices").children().hide();
   $("#answer").children().hide();
-  // $("#sign").children().hide();
-  // $("#timer").children().hide();
+  $("#sign").children().hide();
+  $("#timer").children().hide();
 
-  var showQuestion = $("<h2>");
-  showQuestion.attr("id", questions[questionNumber].choices);
-  showQuestion.append(questions[questionNumber].title);
-  $("#title").append(showQuestion);
-
+  setTimeout(finalPage, 1000);
+  clearInterval(time);
   
-
-  for (var i = 0; i < 4; i++) {
-
-    var choiceList = $("<button>");
-    choiceList.attr("type", "button");
-    choiceList.attr("value", questions[questionNumber].choices[i]);
-    choiceList.css("margin-top", "50px");
-    choiceList.addClass("btn btn-secondary btn-lg btn-block choices");
-    choiceList.append(questions[questionNum].choices[i]);
-    $("#choices").append(choiceList);
   }
-
-  function countDown(){
-    $("#timer").empty();
-    timer = 75;
-    var timeDiv = $("<h6>");
-    timeDiv.append("Time remaining: " + timer + "seconds");
-    $("#timer").append(timeDiv);
-    time = setInterval(clock, 1000);
-    
-    }
-    
-    function clock(){
-    $("#timer").empty();
-    timer--;
-    var timeDiv = $("<h6>");
-    timeDiv.append("Time remaining: " + timer + "seconds");
-    $("#timer").append(timeDiv);
-    
-    if(timer < 1){
-        $("#title").children().hide();
-        $("#choices").children().hide();
-        $("#answer").children().hide();
-        $("#sign").children().hide();
-        $("#timer").children().hide();
-    
-        setTimeout(finalPage, 1000);
-        clearInterval(time);
-
-
-  
 }
