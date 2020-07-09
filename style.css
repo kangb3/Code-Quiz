@@ -1,3 +1,98 @@
+.navbar{
+    width:100%;
+} 
+
+
+
+.jumbotron{
+    background-color: #dfdfdf;
+}
+
+
+
 .container{
+    min-height: calc(100vh - 64px); 
+    align-items: center;
+}
+
+.container h1{
+    padding-top: 5rem;
     text-align: center;
+}
+
+
+
+.hide{
+    display: none;
+}
+
+
+
+#questionRow{
+    margin-top: 60px;
+    text-align: center;
+    justify-content: center;
+}
+
+
+
+#choiceRow{
+    text-align: center;
+    justify-content: center;
+}
+
+
+
+#signRow{
+    margin-top: 80px;
+    text-align: center;
+    justify-content: center;
+}
+
+
+
+#answerRow{
+    margin-top: 20px;
+    text-align: center;
+    justify-content: center;
+}
+
+
+
+#allDoneRow{
+    margin-top: 60px;
+    text-align: center;
+    justify-content: center;
+}
+
+
+
+#finalScoreRow{
+    text-align: center;
+    justify-content: center;
+
+}
+
+
+
+#initialsRow{
+    margin-top: 30px;
+    text-align: center;
+    justify-content: center;
+
+}
+
+
+
+#submitRow{
+    text-align: center;
+    justify-content: center;
+
+}
+
+
+#resetRow{
+    text-align: center;
+    justify-content: center;
+
 }
